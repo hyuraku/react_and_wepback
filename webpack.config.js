@@ -2,10 +2,16 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  entry: path.join(__dirname, "src", "index.js"), // files we will bundle
+  entry: {
+    index: './src/index.js',
+    hello: {
+      dependOn: 'index',
+      import: './src/components/Hello.js',
+    },
+  },  // files we will bundle
   output: {
     path: path.join(__dirname, "build"), // build results file
-    filename: "index.bundle.js"
+    filename: "[name].bundle.js"
   },
   mode: process.env.NODE_ENV || "development", // production or development
   resolve: { 
